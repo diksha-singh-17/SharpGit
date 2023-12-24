@@ -4,22 +4,19 @@ const form = document.querySelector("form");
 const fruits = document.querySelector(".fruits");
 
 // create edit btn el
-const editbtn = document.createElement("button");
-const textEditNode = document.createTextNode("edit");
-editbtn.appendChild(textEditNode);
-console.log(editbtn);
-editbtn.className = "edit-btn";
 
 const btn = document.querySelectorAll(".delete-btn");
 const allItems = document.querySelectorAll(".fruit");
-console.log(allItems.length);
-// allItems[1].appendChild(editbtn);
+
 for (let i = 0; i < allItems.length; i++) {
-  // allItems[i].insertBefore(editbtn, btn);
-  // console.log(i);
-  // allItems[i].style.color = "blue";
+  // create edit btn el
+  const editbtn = document.createElement("button");
+  const textEditNode = document.createTextNode("edit");
+  editbtn.appendChild(textEditNode);
+  // console.log(editbtn);
+  editbtn.className = "edit-btn";
+
   allItems[i].appendChild(editbtn);
-  // allItems[i].innerHTML = '<button class="edit-btn">edit</button>';
 }
 
 // Add input element inside form, before button, to take fruit description
@@ -41,21 +38,16 @@ form.addEventListener("submit", function (event) {
   // ******************
   // Show the fruit description in italics on the next line
   const description = document.getElementById("input");
-  description.setAttribute("class", "dec-area");
-  // description.className = "desc";
-  // desc.style.fontStyle = "italic";
-  const area = `<p>${description.value}</p>`;
-
-  area.id = "desc";
+  const fruitdesc = `<p><i>${description.value}</i></p>`;
   // **********************
   items.innerHTML =
     fruitsToAdd.value +
-    area +
+    fruitdesc +
     '<button class="delete-btn">x</button>' +
     '<button class="edit-btn">edit</button>';
 
   // const textNode = document.createTextNode(fruitsToAdd.value);
-
+  // ***********second way******
   // items.append(textNode);
   // items.className = "fruit";
   // const deletebtn = document.createElement("button");
