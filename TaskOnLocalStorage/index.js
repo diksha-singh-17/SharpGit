@@ -35,8 +35,8 @@ function handleSubmitEvent(event) {
 }
 
 function showData(data) {
-  console.log(data, "************8");
-  console.log(JSON.parse(data));
+  //console.log(data, "************8");
+  //console.log(JSON.parse(data));
   const parsedData = JSON.parse(data);
   console.log(parsedData.name);
   // const detail = JSON.parse(localStorage.getItem(data.email));
@@ -55,7 +55,7 @@ function showData(data) {
   // }
 }
 function deleteDetailsFromScreen(email) {
-  console.log(email, "email");
+  //console.log(email, "email");
   const parentNode = document.getElementById("list");
   const childNodeToBeDeleted = document.getElementById(email);
   if (childNodeToBeDeleted) {
@@ -65,7 +65,7 @@ function deleteDetailsFromScreen(email) {
 }
 
 function EditDetailsFromScreen(email, name, tel) {
-  console.log("name-email-tel");
+  //console.log("name-email-tel");
   document.getElementById("uname").value = name;
   document.getElementById("email").value = email;
   document.getElementById("tel").value = tel;
