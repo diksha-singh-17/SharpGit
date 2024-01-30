@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body style="margin: 0">
+    <!-- Write your code below -->
+    <form>
+      <br />
+      <label for="uname">
+        Username:
+        <input type="text" id="uname" />
+      </label>
+      <br />
+      <label for="email">
+        Email Address (optional):
+        <input type="email " id="email" />
+      </label>
+      <br />
+      <label for="tel">
+        Phone Number :
+        <input type="tel" id="tel" />
+      </label>
+      <br />
+      <button type="submit" onclick="handleSubmitEvent(event)">Submit</button>
+    </form>
+    <ul id="list"></ul>
+  </body>
+  <!-- 2-ways to import axios server api s -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <!-- <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+    integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script> -->
+  <script src="index.js"></script>
+</html>
