@@ -9,6 +9,12 @@ let newEl2 = "";
 let newEl3 = "";
 let newEl4 = "";
 let newEl5 = "";
+
+const obj1 = {
+  flag: false,
+  id: null,
+  // item: null,
+};
 // console.log("count", count);
 function handleEvent(e) {
   e.preventDefault();
@@ -22,22 +28,71 @@ function handleEvent(e) {
     category: item,
   };
 
-  axios
-    .post(
-      "https://crudcrud.com/api/32f6566b2ebc4cc799003faa337bc1d8/feedback",
-      { obj }
-    )
-    .then((res) => console.log(res))
-    .catch((e) => console.log(e));
+  if (obj1.flag === false) {
+    axios
+      .post(
+        "https://crudcrud.com/api/e037d9680e5a473eae54b9e9bb49387b/feedback",
+        { obj }
+      )
+      .then((res) => console.log(res))
+      .catch((e) => console.log(e));
+  } else {
+    const upname = document.getElementById("name").value;
+    const inputCat = document.getElementById("mySelect");
+    const upitem = inputCat.options[inputCat.selectedIndex].text;
+    console.log("inside put");
+    const obj = {
+      name: upname,
+      category: upitem,
+    };
+    axios.put(
+      `https://crudcrud.com/api/e037d9680e5a473eae54b9e9bb49387b/feedback/${obj1.id}`,
+      {
+        obj,
+      }
+    );
+    switch (item) {
+      case "1":
+        --count;
+
+        newEl.textContent = count;
+        break;
+      case "2":
+        --count2;
+
+        newEl2.textContent = count2;
+        break;
+      case "3":
+        --count3;
+
+        newEl3.textContent = count3;
+        break;
+      case "4":
+        --count4;
+
+        newEl4.textContent = count4;
+        break;
+      case "5":
+        --count5;
+
+        newEl5.textContent = count5;
+        break;
+      default:
+        console.log("error");
+    }
+    obj1.flag = false;
+  }
+  // showData(obj1.item, obj1.id);
+  location.reload(true);
   // console.log(item, typeof item);
 }
 
 document.addEventListener("DOMContentLoaded", (e) => {
   axios
-    .get("https://crudcrud.com/api/32f6566b2ebc4cc799003faa337bc1d8/feedback")
+    .get("https://crudcrud.com/api/e037d9680e5a473eae54b9e9bb49387b/feedback")
     .then((response) => {
       response.data.forEach((res) => {
-        console.log(res.obj);
+        // obj1.item = res.obj;
         showData(res.obj, res._id);
       });
     });
@@ -128,62 +183,65 @@ function showData(item, id) {
 
   const list = document.getElementById("list");
   list.innerHTML += `<li class="p-2"id=${item.name}>${item.name}-${item.category}
-    <button id="delete-btn"   class="btn btn-primary m-2" onclick=deleteUserDetails('${item.name}','${id}')>Delete</button>
-    <button id="edit-btn"   class="btn btn-primary m-2" onclick=EditUserDetails('${item.name}','${item.name}')>Edit</button>
+    <button id="delete-btn"   class="btn btn-primary m-2" onclick=deleteUserDetails('${item.name}','${item.category}','${id}')>Delete</button>
+    <button id="edit-btn"   class="btn btn-primary m-2" onclick=EditUserDetails('${item.name}','${item.category}','${id}')>Edit</button>
     </li> `;
 
   document.getElementById("name").value = "";
   document.getElementById("mySelect").value = "";
 }
-function deleteUserDetails(amount, id) {
-  console.log("insde deletets");
+function deleteUserDetails(name, item, id) {
+  console.log("insde deletets", id);
   const parentNode = document.getElementById("list");
-  const childNodeToBeDeleted = document.getElementById(amount);
+  const childNodeToBeDeleted = document.getElementById(name);
   if (childNodeToBeDeleted) {
     parentNode.removeChild(childNodeToBeDeleted);
   }
   axios
     .delete(
-      `https://crudcrud.com/api/32f6566b2ebc4cc799003faa337bc1d8/feedback/${id}`
+      `https://crudcrud.com/api/e037d9680e5a473eae54b9e9bb49387b/feedback/${id}`
     )
     .catch((err) => {
       console.error(err, err.message);
       document.body.innerHTML = "Something went wrong, Check again:" + err;
     });
-}
-
-function EditUserDetails(amt, item) {
-  document.getElementById("name").value = amt;
-  document.getElementById("mySelect").value = item;
-  deleteUserDetails(amt);
-
   switch (item) {
     case "1":
       --count;
-      console.log("inside dec 1");
-      newEl1.textContent = count;
+
+      newEl.textContent = count;
       break;
     case "2":
       --count2;
-      console.log("inside dec 1");
+
       newEl2.textContent = count2;
       break;
     case "3":
       --count3;
-      console.log("inside dec 1");
+
       newEl3.textContent = count3;
       break;
     case "4":
       --count4;
-      console.log("inside dec 1");
+
       newEl4.textContent = count4;
       break;
     case "5":
       --count5;
-      console.log("inside dec 1");
+
       newEl5.textContent = count5;
       break;
     default:
       console.log("error");
   }
+}
+
+function EditUserDetails(amt, item, id) {
+  obj1.flag = true;
+  obj1.id = id;
+  document.getElementById("name").value = amt;
+  document.getElementById("mySelect").value = item;
+
+  document.getElementById("submit-btn").textContent = "Edit";
+  // deleteUserDetails(amt, item, id);
 }
