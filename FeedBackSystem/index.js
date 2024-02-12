@@ -1,21 +1,16 @@
 var count = 0;
-var count2 = 0;
-var count3 = 0;
-var count4 = 0;
-var count5 = 0;
 
 let newEl = "";
-let newEl2 = "";
-let newEl3 = "";
-let newEl4 = "";
-let newEl5 = "";
+// let newEl2 = "";
+// let newEl3 = "";
+// let newEl4 = "";
+// let newEl5 = "";
 
 const obj1 = {
   flag: false,
   id: null,
   // item: null,
 };
-// console.log("count", count);
 function handleEvent(e) {
   e.preventDefault();
 
@@ -31,7 +26,7 @@ function handleEvent(e) {
   if (obj1.flag === false) {
     axios
       .post(
-        "https://crudcrud.com/api/e037d9680e5a473eae54b9e9bb49387b/feedback",
+        "https://crudcrud.com/api/af0c27a5501546aebbc37bc725bcc55d/feedback",
         { obj }
       )
       .then((res) => console.log(res))
@@ -40,13 +35,12 @@ function handleEvent(e) {
     const upname = document.getElementById("name").value;
     const inputCat = document.getElementById("mySelect");
     const upitem = inputCat.options[inputCat.selectedIndex].text;
-    console.log("inside put");
     const obj = {
       name: upname,
       category: upitem,
     };
     axios.put(
-      `https://crudcrud.com/api/e037d9680e5a473eae54b9e9bb49387b/feedback/${obj1.id}`,
+      `https://crudcrud.com/api/af0c27a5501546aebbc37bc725bcc55d/feedback/${obj1.id}`,
       {
         obj,
       }
@@ -54,28 +48,27 @@ function handleEvent(e) {
     switch (item) {
       case "1":
         --count;
-
         newEl.textContent = count;
         break;
       case "2":
-        --count2;
+        --count;
 
-        newEl2.textContent = count2;
+        newEl2.textContent = count;
         break;
       case "3":
-        --count3;
+        --count;
 
-        newEl3.textContent = count3;
+        newEl3.textContent = count;
         break;
       case "4":
-        --count4;
+        --count;
 
-        newEl4.textContent = count4;
+        newEl4.textContent = count;
         break;
       case "5":
-        --count5;
+        --count;
 
-        newEl5.textContent = count5;
+        newEl5.textContent = count;
         break;
       default:
         console.log("error");
@@ -88,11 +81,13 @@ function handleEvent(e) {
 }
 
 document.addEventListener("DOMContentLoaded", (e) => {
+  e.preventDefault();
   axios
-    .get("https://crudcrud.com/api/e037d9680e5a473eae54b9e9bb49387b/feedback")
+    .get("https://crudcrud.com/api/af0c27a5501546aebbc37bc725bcc55d/feedback")
     .then((response) => {
       response.data.forEach((res) => {
-        // obj1.item = res.obj;
+        obj1.item = res.obj;
+        console.log(obj1.item);
         showData(res.obj, res._id);
       });
     });
@@ -104,6 +99,7 @@ function showData(item, id) {
     case "1":
       const parentEl = document.getElementById("star1");
       if (parentEl.children.length === 0) {
+        count = 0;
         newEl = document.createElement("span");
         newEl.textContent = count + 1;
         count++;
@@ -116,64 +112,63 @@ function showData(item, id) {
         // ++count;
         // parentEl.appendChild(newEl);
         // document.getElementsByTagName("span").innerHTML = count;
-
         // parentEl.appendChild(newEl);
       }
-      // count = 0;
+
       break;
     case "2":
       const parentEl2 = document.getElementById("star2");
       if (parentEl2.children.length === 0) {
+        count = 0;
         newEl2 = document.createElement("span");
-        newEl2.textContent = count2 + 1;
-        count2++;
+        newEl2.textContent = count + 1;
+        count++;
         parentEl2.appendChild(newEl2);
       } else {
-        console.log("inside else2", count2);
-        count2++;
-        newEl2.textContent = count2;
+        count++;
+        newEl2.textContent = count;
       }
-      // count = 0;
+
       break;
     case "3":
       const parentEl3 = document.getElementById("star3");
       if (parentEl3.children.length === 0) {
+        count = 0;
         newEl3 = document.createElement("span");
-        newEl3.textContent = count3 + 1;
-        count3++;
+        newEl3.textContent = count + 1;
+        count++;
         parentEl3.appendChild(newEl3);
       } else {
-        console.log("inside else3", count3);
-        count3++;
-        newEl3.textContent = count3;
+        count++;
+        newEl3.textContent = count;
       }
       // count = 0;
       break;
     case "4":
       const parentEl4 = document.getElementById("star4");
       if (parentEl4.children.length === 0) {
+        count = 0;
         newEl4 = document.createElement("span");
-        newEl4.textContent = count4 + 1;
-        count4++;
+        newEl4.textContent = count + 1;
+        count++;
         parentEl4.appendChild(newEl4);
       } else {
-        console.log("inside else--4", count4);
-        count4++;
-        newEl4.textContent = count4;
+        count++;
+        newEl4.textContent = count;
       }
       // count = 0;
       break;
     case "5":
       const parentEl5 = document.getElementById("star5");
       if (parentEl5.children.length === 0) {
+        count = 0;
         newEl5 = document.createElement("span");
-        newEl5.textContent = count5 + 1;
-        count5++;
+        newEl5.textContent = count + 1;
+        count++;
         parentEl5.appendChild(newEl5);
       } else {
-        console.log("inside else5", count5);
-        count5++;
-        newEl5.textContent = count5;
+        count++;
+        newEl5.textContent = count;
       }
       // count = 0;
       break;
@@ -191,7 +186,6 @@ function showData(item, id) {
   document.getElementById("mySelect").value = "";
 }
 function deleteUserDetails(name, item, id) {
-  console.log("insde deletets", id);
   const parentNode = document.getElementById("list");
   const childNodeToBeDeleted = document.getElementById(name);
   if (childNodeToBeDeleted) {
@@ -199,7 +193,7 @@ function deleteUserDetails(name, item, id) {
   }
   axios
     .delete(
-      `https://crudcrud.com/api/e037d9680e5a473eae54b9e9bb49387b/feedback/${id}`
+      `https://crudcrud.com/api/af0c27a5501546aebbc37bc725bcc55d/feedback/${id}`
     )
     .catch((err) => {
       console.error(err, err.message);
@@ -212,24 +206,24 @@ function deleteUserDetails(name, item, id) {
       newEl.textContent = count;
       break;
     case "2":
-      --count2;
+      --count;
 
-      newEl2.textContent = count2;
+      newEl2.textContent = count;
       break;
     case "3":
-      --count3;
+      --count;
 
-      newEl3.textContent = count3;
+      newEl3.textContent = count;
       break;
     case "4":
-      --count4;
+      --count;
 
-      newEl4.textContent = count4;
+      newEl4.textContent = count;
       break;
     case "5":
-      --count5;
+      --count;
 
-      newEl5.textContent = count5;
+      newEl5.textContent = count;
       break;
     default:
       console.log("error");
