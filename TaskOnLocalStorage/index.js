@@ -14,8 +14,8 @@ function handleSubmitEvent(event) {
     tel: utel,
   };
   const dataFields = JSON.stringify(userDetails);
-  localStorage.setItem(userDetails.email, data);
-  console.log(data);
+  localStorage.setItem(userDetails.email, dataFields);
+  console.log(dataFields);
 
   // ***********2nd way**********
   // let arr = new Array();
@@ -34,7 +34,7 @@ function handleSubmitEvent(event) {
   showData(dataFields);
 }
 
-function showData(data) {
+function showData(dataFields) {
   const parsedData1 = JSON.parse(dataFields);
   // const detail = JSON.parse(localStorage.getItem(data.email));
   // console.log(details);
