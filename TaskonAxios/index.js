@@ -9,41 +9,41 @@ function handleSubmitEvent(event) {
     tel: utel,
   };
   const data = JSON.stringify(userDetails);
-  // localStorage.setItem(userDetails.email, data);
   console.log(data);
-
   axios
     .post(
-      "https://crudcrud.com/api/461b4aedf3894bb8aef9d75040891f5a/bookingData",
+      "https://crudcrud.com/api/5cf6fb27665d401aa9515d7ef54f848f/studentsRecordData",
       {
         data,
       }
     )
     .then((response) => {
-      showData(response.data);
+      console.log(response);
     })
     .catch((err) => {
       console.log(err);
-      document.body.innerHTML =
-        document.body.innerHTML + "Something went wrong, Check again:" + err;
+      document.body.innerHTML = "Something went wrong, Check again:" + err;
     });
 }
-//   axios
-//     .get(
-//       "https://crudcrud.com/api/461b4aedf3894bb8aef9d75040891f5a/appointmentData"
-//     )
-//     .then((response) => {
-//       console.log(response);
-//       const t = response.data;
-//       console.log(t);
-// const parsedData = JSON.parse(t);
-// console.log(parsedData);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       document.body.innerHTML =
-//         document.body.innerHTML + "Something went wrong, Check again:" + err;
-//     });
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  event.preventDefault();
+  axios
+    .get(
+      "https://crudcrud.com/api/5cf6fb27665d401aa9515d7ef54f848f/studentsRecordData"
+    )
+    .then((response) => {
+      console.log("response from GET", response);
+      for (let i = 0; i < response.data.length; i++) {
+        console.log(response.data[i]);
+        showData(response.data[i]);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      document.body.innerHTML = "Something went wrong, Check again:" + err;
+    });
+});
 
 function showData(data) {
   console.log(data);

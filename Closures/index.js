@@ -25,3 +25,21 @@ const name1 = (arr) => {
 let fun1 = name1(["ram", "shyam"]);
 fun1(); // Print Hello Ram
 fun1(); //print Hello Shyam
+
+let obj = {
+  name: "dixa",
+  age: 22,
+
+  abc: () => {
+    console.log(this.name + this.age);
+  },
+  xyz() {
+    let that = this;
+    function demo() {
+      console.log(that.name + that.age);
+    }
+    demo();
+  },
+};
+obj.abc();
+obj.xyz();

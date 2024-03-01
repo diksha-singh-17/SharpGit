@@ -1,6 +1,8 @@
 let posts = [
   { title: "POST1", body: "" },
   { title: "POST2", body: "" },
+  { title: "POST9", body: "" },
+  { title: "POST10", body: "" },
 ];
 
 function printPost() {
@@ -8,30 +10,48 @@ function printPost() {
     console.log(post.title);
   });
 }
+// printPost();
 
-function createPost(blog) {
+const createPost = async (blog) => {
   return new Promise((res, rej) => {
     setTimeout(() => {
       res(posts.push(blog));
     }, 3000);
   });
-}
-function updateLastUserActivityTime() {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      const time = new Date().getMinutes();
-      res(time);
-    }, 2000);
-  });
-}
+};
+const updateLastUserActivityTime = new Promise((res, rej) => {
+  setTimeout(() => {
+    const time = new Date().getMinutes();
+    res(time);
+  }, 2000);
+});
 
-function deletePost() {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      res(posts.pop());
-    }, 1000);
-  });
-}
+const deletePost = new Promise((res, rej) => {
+  setTimeout(() => {
+    res(posts.pop());
+  }, 1000);
+});
+
+// const addPost = async () => {
+//   console.log(
+//     await Promise.all([
+//       createPost({ title: "Post Five", body: "This is Post Five" }),
+//       updateLastUserActivityTime,
+//     ])
+//   );
+// let a = await createPost({ title: "Post Five", body: "This is Post Five" });
+// let ab = await createPost({ title: "Post 6", body: "This is Post Six" });
+// printPost();
+// console.log(ab);
+// let [b, c] = await Promise.all([updateLastUserActivityTime, deletePost]);
+// console.log("Deleted post : ", a, b, c.title);
+// return a, ab;
+// };
+// addPost()
+//   // .then((msg) => console.log(msg))
+//   .then(deletePost)
+//   // .then((msg) => console.log("deleted", msg))
+//   .then(printPost);
 
 //update last activity time and then create a post
 // createPost({ title: "Post Five", body: "This is Post Five" })
@@ -49,18 +69,19 @@ function deletePost() {
 
 Promise.all([
   createPost({ title: "Post Five", body: "This is Post Five" }),
-  updateLastUserActivityTime(),
+  updateLastUserActivityTime,
 ]).then((values) => {
   console.log(values.reduce((m, n) => m + "===>" + n));
 });
 
 Promise.all([
   createPost({ title: "Post Five", body: "This is Post Five" }),
-  updateLastUserActivityTime(),
+  updateLastUserActivityTime,
 ])
   .then((values) => {
     console.log(values);
     console.log(values.reduce((m, n) => m + "===>" + n));
   })
   .then(deletePost)
+  .then((msg) => console.log(msg))
   .then(printPost);
