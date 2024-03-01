@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 function showData(data) {
   const parsedData = data.data;
+  console.log(parsedData);
   const list = document.getElementById("list");
   list.innerHTML += `<li id=${parsedData.email}>${parsedData.name}-${parsedData.email}-${parsedData.tel}
     <button id="delete-btn" onclick=deleteDetailsFromScreen('${parsedData.email}','${data._id}')>Delete</button>

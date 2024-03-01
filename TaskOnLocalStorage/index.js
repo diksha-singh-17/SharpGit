@@ -35,7 +35,6 @@ function handleSubmitEvent(event) {
 }
 
 function showData(data) {
-  console.log(data, "************8");
   console.log(JSON.parse(data));
   const parsedData = JSON.parse(data);
   console.log(parsedData.name);

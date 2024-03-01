@@ -1,10 +1,10 @@
 var count = 0;
 
 let newEl = "";
-// let newEl2 = "";
-// let newEl3 = "";
-// let newEl4 = "";
-// let newEl5 = "";
+let newEl2 = "";
+let newEl3 = "";
+let newEl4 = "";
+let newEl5 = "";
 
 const obj1 = {
   flag: false,
@@ -26,10 +26,13 @@ function handleEvent(e) {
   if (obj1.flag === false) {
     axios
       .post(
-        "https://crudcrud.com/api/af0c27a5501546aebbc37bc725bcc55d/feedback",
+        "https://crudcrud.com/api/c9194962c1a6479880cf8b1d53a04674/feedback",
         { obj }
       )
-      .then((res) => console.log(res))
+      .then((res) => {
+        showData(obj, obj1.id);
+        console.log(res);
+      })
       .catch((e) => console.log(e));
   } else {
     const upname = document.getElementById("name").value;
@@ -39,12 +42,18 @@ function handleEvent(e) {
       name: upname,
       category: upitem,
     };
-    axios.put(
-      `https://crudcrud.com/api/af0c27a5501546aebbc37bc725bcc55d/feedback/${obj1.id}`,
-      {
-        obj,
-      }
-    );
+    axios
+      .put(
+        `https://crudcrud.com/api/c9194962c1a6479880cf8b1d53a04674/feedback/${obj1.id}`,
+        {
+          obj,
+        }
+      )
+      .then((res) => {
+        showData(obj, obj1.id);
+        obj1.flag = false;
+      })
+      .catch((e) => console.log(e));
     switch (item) {
       case "1":
         --count;
@@ -73,9 +82,8 @@ function handleEvent(e) {
       default:
         console.log("error");
     }
-    obj1.flag = false;
   }
-  // showData(obj1.item, obj1.id);
+
   location.reload(true);
   // console.log(item, typeof item);
 }
@@ -83,11 +91,11 @@ function handleEvent(e) {
 document.addEventListener("DOMContentLoaded", (e) => {
   e.preventDefault();
   axios
-    .get("https://crudcrud.com/api/af0c27a5501546aebbc37bc725bcc55d/feedback")
+    .get("https://crudcrud.com/api/c9194962c1a6479880cf8b1d53a04674/feedback")
     .then((response) => {
       response.data.forEach((res) => {
         obj1.item = res.obj;
-        console.log(obj1.item);
+        // console.log(obj1.item);
         showData(res.obj, res._id);
       });
     });
@@ -105,14 +113,9 @@ function showData(item, id) {
         count++;
         parentEl.appendChild(newEl);
       } else {
-        console.log("inside else1", count);
+        // console.log("inside else1", count);
         count++;
-        // newEl = document.createElement("span");
         newEl.textContent = count;
-        // ++count;
-        // parentEl.appendChild(newEl);
-        // document.getElementsByTagName("span").innerHTML = count;
-        // parentEl.appendChild(newEl);
       }
 
       break;
@@ -193,7 +196,7 @@ function deleteUserDetails(name, item, id) {
   }
   axios
     .delete(
-      `https://crudcrud.com/api/af0c27a5501546aebbc37bc725bcc55d/feedback/${id}`
+      `https://crudcrud.com/api/c9194962c1a6479880cf8b1d53a04674/feedback/${id}`
     )
     .catch((err) => {
       console.error(err, err.message);
@@ -228,6 +231,7 @@ function deleteUserDetails(name, item, id) {
     default:
       console.log("error");
   }
+  // showData(obj, obj1.id);
 }
 
 function EditUserDetails(amt, item, id) {
