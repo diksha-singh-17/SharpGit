@@ -13,9 +13,9 @@ function handleSubmitEvent(event) {
     email: uemail,
     tel: utel,
   };
-  const data = JSON.stringify(userDetails);
-  localStorage.setItem(userDetails.email, data);
-  console.log(data);
+  const dataFields = JSON.stringify(userDetails);
+  localStorage.setItem(userDetails.email, dataFields);
+  console.log(dataFields);
 
   // ***********2nd way**********
   // let arr = new Array();
@@ -34,10 +34,9 @@ function handleSubmitEvent(event) {
   showData(data);
 }
 
-function showData(data) {
-  console.log(JSON.parse(data));
-  const parsedData = JSON.parse(data);
-  console.log(parsedData.name);
+function showData(dataFields) {
+  console.log(JSON.parse(dataFields));
+  const parsedData1 = JSON.parse(dataFields);
   // const detail = JSON.parse(localStorage.getItem(data.email));
   // console.log(details);
   // console.log(details[0].name);
@@ -46,9 +45,9 @@ function showData(data) {
   // console.log("details--", detail);
   //   const child = document.createElement("li");
   const list = document.getElementById("list");
-  list.innerHTML += `<li id=${parsedData.email}>${parsedData.name}-${parsedData.email}-${parsedData.tel}
-    <button id="delete-btn" onclick=deleteDetailsFromScreen('${parsedData.email}')>Delete</button>
-    <button id="edit-btn" onclick=EditDetailsFromScreen('${parsedData.email}','${parsedData.name}','${parsedData.tel}')>Edit</button>
+  list.innerHTML += `<li id=${parsedData1.email}>${parsedData1.name}-${parsedData1.email}-${parsedData1.tel}
+    <button id="delete-btn" onclick=deleteDetailsFromScreen('${parsedData1.email}')>Delete</button>
+    <button id="edit-btn" onclick=EditDetailsFromScreen('${parsedData1.email}','${parsedData1.name}','${parsedData1.tel}')>Edit</button>
     </li> `;
   // list.appendChild(child);
   // }
