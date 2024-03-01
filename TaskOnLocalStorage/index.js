@@ -13,7 +13,7 @@ function handleSubmitEvent(event) {
     email: uemail,
     tel: utel,
   };
-  const data = JSON.stringify(userDetails);
+  const dataFields = JSON.stringify(userDetails);
   localStorage.setItem(userDetails.email, data);
   console.log(data);
 
@@ -31,13 +31,11 @@ function handleSubmitEvent(event) {
   //   console.log(data);
   //   localStorage.setItem("UserDetails", JSON.stringify(data));
   // }
-  showData(data);
+  showData(dataFields);
 }
 
 function showData(data) {
-  //console.log(data, "************8");
-  //console.log(JSON.parse(data));
-  const parsedData = JSON.parse(data);
+  const parsedData = JSON.parse(dataFields);
   console.log(parsedData.name);
   // const detail = JSON.parse(localStorage.getItem(data.email));
   // console.log(details);
