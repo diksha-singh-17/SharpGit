@@ -35,7 +35,6 @@ function handleSubmitEvent(event) {
 }
 
 function showData(dataFields) {
-  console.log(JSON.parse(dataFields));
   const parsedData1 = JSON.parse(dataFields);
   // const detail = JSON.parse(localStorage.getItem(data.email));
   // console.log(details);
